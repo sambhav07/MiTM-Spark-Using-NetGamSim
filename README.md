@@ -2,12 +2,13 @@
 
 ### Email Id : sjain218@uic.edu
 
+### Video Link: https://youtu.be/e6XiIUHZmpE
+
 # MiTM-Spark-Using-NetGamSim
 
 Welcome to `MiTM-Spark-Using-NetGamSim`! This project leverages the capabilities of Spark and integrates it with NetGamSim for efficient and scalable MiTM (Man-in-the-Middle) simulations. This project implements a graph processing tool using Apache Spark's GraphX to perform random walks on graphs. We performs random walks, calculates similarity metrics, and generates statistics related to the walks such as number of successful/failed attacks based on a similarity threshold.
 
-![Project Banner or Logo](URL_to_a_banner_or_logo_if_you_have_one)
-
+<img src="https://drive.google.com/uc?export=view&id=1gRxmqcYrNuqALq7IkcY6Kk16TNwaoLCO" width="300" alt="Description"/>
 
 # Steps and Workflow
 ### 1. Graph Generation
