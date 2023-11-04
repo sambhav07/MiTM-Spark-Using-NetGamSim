@@ -131,7 +131,7 @@ Create an AWS S3 bucket to host the JAR and necessary input files (i.e., .ngs an
 Inside the bucket, create input, jar, and output folders.
 Running Steps
 #### 1. Build the JAR
-`sbt clean compile`
+`sbt clean compile`<br>
 `sbt -mem 2048 assembly`
 
 #### 2. Deploy the JAR to S3
