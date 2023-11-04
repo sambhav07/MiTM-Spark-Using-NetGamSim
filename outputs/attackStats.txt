@@ -1,0 +1,114 @@
+Optimal Number of Walks: 177
+Number of Successful Attacks: 96
+Number of Failed Attacks: 2
+
+---- Failed Attacks ----
+Node: 96, Valuable Node: 96, Similarity Score: 0.702785212011622
+Node: 106, Valuable Node: 106, Similarity Score: 0.8741770950905733
+
+---- Successful Attacks ----
+Node: 193, Valuable Node: 193, Similarity Score: 1.0
+Node: 32, Valuable Node: 32, Similarity Score: 1.0
+Node: 148, Valuable Node: 148, Similarity Score: 1.0
+Node: 185, Valuable Node: 185, Similarity Score: 1.0
+Node: 219, Valuable Node: 219, Similarity Score: 1.0
+Node: 230, Valuable Node: 230, Similarity Score: 1.0
+Node: 116, Valuable Node: 116, Similarity Score: 1.0
+Node: 84, Valuable Node: 84, Similarity Score: 1.0
+Node: 17, Valuable Node: 17, Similarity Score: 1.0
+Node: 267, Valuable Node: 267, Similarity Score: 1.0
+Node: 187, Valuable Node: 187, Similarity Score: 1.0
+Node: 281, Valuable Node: 281, Similarity Score: 1.0
+Node: 234, Valuable Node: 291, Similarity Score: 0.7543632072833546
+Node: 82, Valuable Node: 82, Similarity Score: 1.0
+Node: 89, Valuable Node: 89, Similarity Score: 1.0
+Node: 180, Valuable Node: 180, Similarity Score: 1.0
+Node: 264, Valuable Node: 264, Similarity Score: 1.0
+Node: 120, Valuable Node: 120, Similarity Score: 1.0
+Node: 153, Valuable Node: 153, Similarity Score: 1.0
+Node: 23, Valuable Node: 23, Similarity Score: 1.0
+Node: 101, Valuable Node: 101, Similarity Score: 1.0
+Node: 83, Valuable Node: 83, Similarity Score: 1.0
+Node: 108, Valuable Node: 108, Similarity Score: 1.0
+Node: 186, Valuable Node: 186, Similarity Score: 1.0
+Node: 12, Valuable Node: 12, Similarity Score: 1.0
+Node: 283, Valuable Node: 283, Similarity Score: 1.0
+Node: 111, Valuable Node: 111, Similarity Score: 1.0
+Node: 191, Valuable Node: 191, Similarity Score: 1.0
+Node: 276, Valuable Node: 276, Similarity Score: 1.0
+Node: 296, Valuable Node: 296, Similarity Score: 1.0
+Node: 64, Valuable Node: 64, Similarity Score: 1.0
+Node: 239, Valuable Node: 239, Similarity Score: 1.0
+Node: 7, Valuable Node: 7, Similarity Score: 1.0
+Node: 77, Valuable Node: 77, Similarity Score: 1.0
+Node: 271, Valuable Node: 271, Similarity Score: 1.0
+Node: 291, Valuable Node: 234, Similarity Score: 0.7543632072833546
+Node: 125, Valuable Node: 125, Similarity Score: 1.0
+Node: 43, Valuable Node: 43, Similarity Score: 1.0
+Node: 173, Valuable Node: 173, Similarity Score: 1.0
+Node: 86, Valuable Node: 86, Similarity Score: 1.0
+Node: 234, Valuable Node: 234, Similarity Score: 1.0
+Node: 76, Valuable Node: 76, Similarity Score: 1.0
+Node: 113, Valuable Node: 113, Similarity Score: 1.0
+Node: 37, Valuable Node: 37, Similarity Score: 1.0
+Node: 205, Valuable Node: 205, Similarity Score: 1.0
+Node: 220, Valuable Node: 220, Similarity Score: 1.0
+Node: 56, Valuable Node: 56, Similarity Score: 1.0
+Node: 9, Valuable Node: 9, Similarity Score: 1.0
+Node: 223, Valuable Node: 223, Similarity Score: 1.0
+Node: 263, Valuable Node: 263, Similarity Score: 1.0
+Node: 215, Valuable Node: 215, Similarity Score: 1.0
+Node: 184, Valuable Node: 184, Similarity Score: 1.0
+Node: 210, Valuable Node: 210, Similarity Score: 1.0
+Node: 183, Valuable Node: 183, Similarity Score: 1.0
+Node: 165, Valuable Node: 165, Similarity Score: 1.0
+Node: 15, Valuable Node: 15, Similarity Score: 1.0
+Node: 203, Valuable Node: 203, Similarity Score: 1.0
+Node: 206, Valuable Node: 206, Similarity Score: 1.0
+Node: 175, Valuable Node: 175, Similarity Score: 1.0
+Node: 284, Valuable Node: 284, Similarity Score: 1.0
+Node: 218, Valuable Node: 218, Similarity Score: 1.0
+Node: 258, Valuable Node: 258, Similarity Score: 1.0
+Node: 151, Valuable Node: 151, Similarity Score: 1.0
+Node: 50, Valuable Node: 50, Similarity Score: 1.0
+Node: 51, Valuable Node: 51, Similarity Score: 1.0
+Node: 224, Valuable Node: 224, Similarity Score: 1.0
+Node: 262, Valuable Node: 262, Similarity Score: 1.0
+Node: 291, Valuable Node: 291, Similarity Score: 1.0
+Node: 163, Valuable Node: 163, Similarity Score: 1.0
+Node: 20, Valuable Node: 20, Similarity Score: 1.0
+Node: 221, Valuable Node: 221, Similarity Score: 1.0
+Node: 241, Valuable Node: 241, Similarity Score: 1.0
+Node: 174, Valuable Node: 174, Similarity Score: 1.0
+Node: 91, Valuable Node: 91, Similarity Score: 1.0
+Node: 139, Valuable Node: 139, Similarity Score: 1.0
+Node: 88, Valuable Node: 88, Similarity Score: 1.0
+Node: 3, Valuable Node: 3, Similarity Score: 1.0
+Node: 5, Valuable Node: 5, Similarity Score: 1.0
+Node: 126, Valuable Node: 126, Similarity Score: 1.0
+Node: 72, Valuable Node: 72, Similarity Score: 1.0
+Node: 121, Valuable Node: 121, Similarity Score: 1.0
+Node: 272, Valuable Node: 272, Similarity Score: 1.0
+Node: 247, Valuable Node: 247, Similarity Score: 1.0
+Node: 131, Valuable Node: 131, Similarity Score: 1.0
+Node: 8, Valuable Node: 8, Similarity Score: 1.0
+Node: 145, Valuable Node: 145, Similarity Score: 1.0
+Node: 236, Valuable Node: 236, Similarity Score: 1.0
+Node: 118, Valuable Node: 118, Similarity Score: 1.0
+Node: 90, Valuable Node: 90, Similarity Score: 1.0
+Node: 292, Valuable Node: 292, Similarity Score: 1.0
+Node: 200, Valuable Node: 200, Similarity Score: 1.0
+Node: 58, Valuable Node: 58, Similarity Score: 1.0
+Node: 34, Valuable Node: 34, Similarity Score: 1.0
+Node: 159, Valuable Node: 159, Similarity Score: 1.0
+Node: 26, Valuable Node: 26, Similarity Score: 1.0
+Node: 33, Valuable Node: 33, Similarity Score: 1.0
+
+---- Metrics ----
+Total Walks : 177.0
+Successful Walks : 59.0
+Mean no of Nodes in total walks : 6.3107344632768365
+Minimum no of Nodes in total walks : 1.0
+Success Walks Ratio : 0.3333333333333333
+Max no of Nodes in total walks : 9.0
+Median no of Nodes in total walks : 8.0
