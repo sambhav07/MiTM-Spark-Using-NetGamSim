@@ -14,7 +14,8 @@ libraryDependencies ++= Seq(
   "org.yaml" % "snakeyaml" % "1.29",
   "org.apache.httpcomponents" % "httpclient" % "4.5.13",
   "software.amazon.awssdk" % "s3" % "2.16.83",
-  "org.scalatest" %% "scalatest" % "3.2.9" % Test
+  "org.scalatest" %% "scalatest" % "3.2.9" % Test,
+  "log4j" % "log4j" % "1.2.17",
 )
 
 dependencyOverrides ++= Seq(

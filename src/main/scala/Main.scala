@@ -1,13 +1,12 @@
 import NetGraphAlgebraDefs.NodeObject
+import org.apache.logging.log4j.{LogManager, Logger}
 import org.apache.spark.graphx._
 import org.apache.spark.{SparkConf, SparkContext}
-import similarity.SimilarityMetrics
 import similarity.SimilarityMetrics._
-import utilities.NetGraph.loadGraph
-import utilities.GraphUtilities
 import utilities.GraphUtilities._
+import utilities.NetGraph.loadGraph
 
-import scala.collection.mutable.{ArrayBuffer, ListBuffer}
+import scala.collection.mutable.ListBuffer
 import scala.util.Random
 
 
@@ -16,25 +15,26 @@ object Main {
   def main(args: Array[String]): Unit = {
     val conf = new SparkConf().setAppName("RandomWalkGraphX").setMaster("local[*]")
     val sc = new SparkContext(conf)
+    val logger: Logger = LogManager.getLogger(getClass.getName)
 
-//    val similarityOps = new SimilarityMetrics()
-//    val utilityOps = new GraphUtilities()
     val originalNodesObjectsURL = args(0)
     val perturbedNodesObjectsURL = args(1)
-    println(s"arg 0 : ${originalNodesObjectsURL}")
-    println(s"arg 1 : ${perturbedNodesObjectsURL}")
+
+    logger.info(s"arg 0 : ${originalNodesObjectsURL}")
+    logger.info(s"arg 1 : ${perturbedNodesObjectsURL}")
+
     val (originalNodesObjects, _) = loadGraph(originalNodesObjectsURL)
     val (perturbedNodesObjects, perturbedEdgesObject) = loadGraph(perturbedNodesObjectsURL)
     var successfulWalks = 0
 
-    println(s"perturbed nodes: ${perturbedNodesObjects}")
-    println(s"perturbed edges: ${perturbedEdgesObject}")
+    logger.info(s"perturbed nodes: ${perturbedNodesObjects}")
+    logger.info(s"perturbed edges: ${perturbedEdgesObject}")
 
-    println(s"original nodes: ${originalNodesObjects}")
+    logger.info(s"original nodes: ${originalNodesObjects}")
 
     val nodesWithValuableData = originalNodesObjects.filter(node => node.valuableData)
 
-    println(s"nodes with valueable data: ${nodesWithValuableData}")
+    logger.info(s"nodes with valueable data: ${nodesWithValuableData}")
 
     val allNodes = originalNodesObjects ++ perturbedNodesObjects
 
@@ -48,10 +48,9 @@ object Main {
       (allNodes.minBy(_.maxBranchingFactor).maxBranchingFactor, allNodes.maxBy(_.maxBranchingFactor).maxBranchingFactor),
       (allNodes.minBy(_.maxProperties).maxProperties, allNodes.maxBy(_.maxProperties).maxProperties),
       (allNodes.minBy(_.storedValue).storedValue, allNodes.maxBy(_.storedValue).storedValue)
-      // Note: I'm ignoring id and valuableData as they may not be suitable for normalization in this context.
     )
 
-    println(s"minMaxValues: ${minMaxValues}")
+    logger.info(s"minMaxValues: ${minMaxValues}")
 
     // A cache for storing computed similarity scores
     val similarityCache = scala.collection.mutable.Map[(Long, Long), Double]()
@@ -64,9 +63,10 @@ object Main {
 
 
     val (modifiedNodes, removedNodes, addedNodes) = processYamlFile(inputYamlPath, fixedYamlPath)
-    println(s"Modified Nodes: $modifiedNodes")
-    println(s"Removed Nodes: $removedNodes")
-    println(s"Added Nodes: $addedNodes")
+    logger.info(s"Modified Nodes: $modifiedNodes")
+    logger.info(s"Removed Nodes: $removedNodes")
+    logger.info(s"Added Nodes: $addedNodes")
+
 
 
     //construct graph using graphx library and spark context
@@ -75,6 +75,7 @@ object Main {
     val graph = Graph(vertices, edges)
 
     def randomWalkFromNode[T](graph: Graph[T, _], startNode: VertexId, maxSteps: Int): List[VertexId] = {
+      logger.info(s"Starting Random walk from node")
       var currentNode = startNode
       var walkPath = List[VertexId](currentNode)
       var visitedNodes = Set[VertexId](currentNode)
@@ -94,6 +95,7 @@ object Main {
     }
 
     def randomWalk[T](graph: Graph[T, _], maxSteps: Int, alreadyStartedNodes: Set[VertexId]): (List[VertexId], Set[VertexId]) = {
+      logger.info(s"Inside RandomWalk method")
       val remainingNodes = graph.vertices.filter(v => !alreadyStartedNodes.contains(v._1)).collect()
 
       // If we've already started from every node, return empty
@@ -108,6 +110,7 @@ object Main {
     }
 
     def decideNumWalksAndShowPaths[T](graph: Graph[T, _], desiredCoverage: Double): (Int, Map[String, Double]) = {
+      logger.info(s"Random walk initiated")
       val maxWalks = graph.vertices.count().toInt * 2 // Just keeping this factor of 2. Adjust if needed.
       var currentWalks = 0
       var currentCoverage = 0.0
@@ -185,7 +188,9 @@ object Main {
 
       println("\n---- Similarity Cache ----")
       similarityCache.foreach { case ((nodeId, valuableNodeId), similarityScore) =>
-        println(s"Node: $nodeId, Valuable Node: $valuableNodeId, Similarity Score: $similarityScore")
+//        println(s"Node: $nodeId, Valuable Node: $valuableNodeId, Similarity Score: $similarityScore")
+        logger.info(s"Node: $nodeId, Valuable Node: $valuableNodeId, Similarity Score: $similarityScore")
+
       }
 
       // Metrics calculation and printing
@@ -198,11 +203,11 @@ object Main {
         sortedPathLengths(sortedPathLengths.size / 2)
       }
       val meanLength = pathLengths.sum.toDouble / pathLengths.size
-      println(s"Min Length: $minLength, Max Length: $maxLength, Median Length: $medianLength, Mean Length: $meanLength")
+      logger.info(s"Min Length: $minLength, Max Length: $maxLength, Median Length: $medianLength, Mean Length: $meanLength")
 
       val successWalksRatio = successfulWalks.toDouble / currentWalks
-      println(s"Success Walks and Total Walks: ${successfulWalks.toDouble} $currentWalks")
-      println(s"Success Walks Ratio: $successWalksRatio")
+      logger.info(s"Success Walks and Total Walks: ${successfulWalks.toDouble} $currentWalks")
+      logger.info(s"Success Walks Ratio: $successWalksRatio")
       println(allPathsStringBuilder.toString())
 
       val metricsMap = Map(
@@ -220,30 +225,28 @@ object Main {
 
     val desiredCoverage = 0.9
     val (optimalNumWalks, metrics) = decideNumWalksAndShowPaths(graph, desiredCoverage)
-    println(s"Optimal number of walks for desired coverage: $optimalNumWalks")
+    logger.info(s"Optimal number of walks for desired coverage: $optimalNumWalks")
     val numberOfSuccessfulAttacks = successfulAttackDetails.length
     val numberOfFailedAttacks = failedAttackDetails.length
 
     // Print number of successful attacks
-    println(s"Number of Successful Attacks: $numberOfSuccessfulAttacks")
+    logger.info(s"Number of Successful Attacks: $numberOfSuccessfulAttacks")
     // Print details of successful attacks
     successfulAttackDetails.foreach { case (nodeId, valuableId, score) =>
-      println(s"Successful Attack Detail - Node: $nodeId, Valuable Node: $valuableId, Similarity Score: $score")
+      logger.info(s"Successful Attack Detail - Node: $nodeId, Valuable Node: $valuableId, Similarity Score: $score")
     }
 
     // Print number of failed attacks
     println(s"\nNumber of Failed Attacks: $numberOfFailedAttacks")
+    logger.info(s"\n logger Number of Failed Attacks: $numberOfFailedAttacks")
     // Print details of failed attacks
     failedAttackDetails.foreach { case (nodeId, valuableId, score) =>
-      println(s"Failed Attack Detail - Node: $nodeId, Valuable Node: $valuableId, Similarity Score: $score")
+      logger.info(s"Failed Attack Detail - Node: $nodeId, Valuable Node: $valuableId, Similarity Score: $score")
     }
-
-    println(s"nodes with valueable data: ${nodesWithValuableData}")
 
     val failedAttacksSet = failedAttackDetails.toSet
     val successfulAttacksSet = successfulAttackDetails.toSet
     val filename = args(4)
     writeStatsToFile(filename, optimalNumWalks, numberOfSuccessfulAttacks, numberOfFailedAttacks, failedAttacksSet, successfulAttacksSet, metrics)
-
   }
 }

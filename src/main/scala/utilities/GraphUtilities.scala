@@ -16,6 +16,7 @@ import org.apache.http.impl.client.HttpClients
 import org.apache.http.client.methods.{HttpGet, HttpPut}
 import org.apache.http.entity.StringEntity
 import org.apache.http.util.EntityUtils
+import similarity.SimilarityMetrics.logger
 import software.amazon.awssdk.auth.credentials.{AwsBasicCredentials, StaticCredentialsProvider}
 import software.amazon.awssdk.core.sync.RequestBody
 
@@ -49,6 +50,7 @@ object GraphUtilities {
   }
 
   def writeYamlContentToHttp(url: String, content: String): Unit = {
+    logger.info(s"writing Yaml file through http")
     val httpClient: CloseableHttpClient = HttpClients.createDefault()
     println(s"url: ${url}")
     println(s"content: ${content}")
@@ -68,6 +70,7 @@ object GraphUtilities {
 
 
   def replaceTabsWithSpaces(inputStream: InputStream, outputFilePath: String, spacesPerTab: Int = 2): Unit = {
+    logger.info(s"replacing tabs with spaces")
     val content = Source.fromInputStream(inputStream).mkString.replaceAll("\t", " " * spacesPerTab)
 
     if (outputFilePath.startsWith("s3://")) {
@@ -90,6 +93,7 @@ object GraphUtilities {
   }
 
   def processYamlFile(inputYamlPath: String, fixedYamlPath: String): (List[Any], List[Any], List[Any]) = {
+    logger.info(s"processing yaml file")
 
     val inputStream: InputStream =
       if (inputYamlPath.startsWith("s3://")) {
@@ -181,6 +185,7 @@ object GraphUtilities {
                         successfulAttacks: Set[(VertexId, VertexId, Double)],
                         metrics: Map[String, Double] // <-- Add this parameter
                       ): Unit = {
+    logger.info(s"writing statistics to file")
     val sb = new StringBuilder()
 
     // Write the summary statistics
